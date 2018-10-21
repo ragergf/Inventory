@@ -2,10 +2,13 @@
 
 App.factory('ProductService', ['$http', '$q', function($http, $q){
 
+	var server = '192.168.1.101';
+	var port = '8080';
+
 	return {
 		
 			fetchAllProducts: function() {
-					return $http.get('http://192.168.0.22:8080/product/')
+					return $http.get('http://'+server+':'+port+'/product/')
 							.then(
 									function(response){
 										return response.data;
@@ -18,7 +21,7 @@ App.factory('ProductService', ['$http', '$q', function($http, $q){
 			},
 		    
 		    createProduct: function(product){
-					return $http.post('http://192.168.0.22:8080/product/', product)
+					return $http.post('http://'+server+':'+port+'/product/', product)
 							.then(
 									function(response){
 										return response.data;
@@ -31,7 +34,7 @@ App.factory('ProductService', ['$http', '$q', function($http, $q){
 		    },
 		    
 		    updateProduct: function(product, id){
-					return $http.put('http://192.168.0.22:8080/product/'+id, product)
+					return $http.put('http://'+server+':'+port+'/product/'+id, product)
 							.then(
 									function(response){
 										return response.data;
@@ -44,7 +47,7 @@ App.factory('ProductService', ['$http', '$q', function($http, $q){
 			},
 		    
 			deleteProduct: function(id){
-					return $http.delete('http://192.168.0.22:8080/product/'+id)
+					return $http.delete('http://'+server+':'+port+'/product/'+id)
 							.then(
 									function(response){
 										return response.data;
@@ -57,7 +60,7 @@ App.factory('ProductService', ['$http', '$q', function($http, $q){
 			},
 			
 			searchByProduct: function(barcode){
-					return $http.get('http://192.168.0.22:8080/product/search/findByBarcode?barcode='+barcode)
+					return $http.get('http://'+server+':'+port+'/product/search/findByBarcode?barcode='+barcode)
 					.then(
 									function(response){										
 										return response.data;

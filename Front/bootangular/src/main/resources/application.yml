@@ -2,5 +2,5 @@ spring:
   dataSource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost/inventory
-    username: root
-    password: root   
+    username: server
+    password: server   

@@ -1,0 +1,9 @@
+/home/server/sourceRepo/inventory/Inventory/Back/inventoryApiRest/src/main/java/org/inventory/api/inventoryApiRest/filter/SimpleCORSFilter.java
+/home/server/sourceRepo/inventory/Inventory/Back/inventoryApiRest/src/main/java/org/inventory/api/inventoryApiRest/model/Inventory.java
+/home/server/sourceRepo/inventory/Inventory/Back/inventoryApiRest/src/main/java/org/inventory/api/inventoryApiRest/repository/InventoryRepository.java
+/home/server/sourceRepo/inventory/Inventory/Back/inventoryApiRest/src/main/java/org/inventory/api/inventoryApiRest/config/RepositoryConfig.java
+/home/server/sourceRepo/inventory/Inventory/Back/inventoryApiRest/src/main/java/org/inventory/api/inventoryApiRest/model/Department.java
+/home/server/sourceRepo/inventory/Inventory/Back/inventoryApiRest/src/main/java/org/inventory/api/inventoryApiRest/repository/DepartmentRepository.java
+/home/server/sourceRepo/inventory/Inventory/Back/inventoryApiRest/src/main/java/org/inventory/api/inventoryApiRest/model/Product.java
+/home/server/sourceRepo/inventory/Inventory/Back/inventoryApiRest/src/main/java/org/inventory/api/inventoryApiRest/InventoryApiRestApplication.java
+/home/server/sourceRepo/inventory/Inventory/Back/inventoryApiRest/src/main/java/org/inventory/api/inventoryApiRest/repository/ProductRepository.java

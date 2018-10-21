@@ -1,0 +1,13 @@
+pe/joedayz/modelo/User.class
+pe/joedayz/rest/ProductRepository.class
+pe/joedayz/service/UserService.class
+pe/joedayz/BootangularApplication.class
+pe/joedayz/repository/UserRepository.class
+pe/joedayz/rest/InventoryRepository.class
+pe/joedayz/rest/UserRestController.class
+pe/joedayz/modelo/Inventory.class
+pe/joedayz/modelo/Product.class
+pe/joedayz/rest/DepartmentRepository.class
+pe/joedayz/service/UserServiceImpl.class
+pe/joedayz/rest/IndexController.class
+pe/joedayz/modelo/Department.class

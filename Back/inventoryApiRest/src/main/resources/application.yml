@@ -1,6 +1,10 @@
-spring:  
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
   dataSource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost/inventory
-    username: root
-    password: root   
+    username: server
+    password: server
