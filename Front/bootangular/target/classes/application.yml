@@ -1,6 +1,0 @@
-spring:  
-  dataSource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost/inventory
-    username: server
-    password: server   

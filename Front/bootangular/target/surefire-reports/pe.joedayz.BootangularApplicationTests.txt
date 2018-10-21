@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: pe.joedayz.BootangularApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 53.908 s - in pe.joedayz.BootangularApplicationTests
