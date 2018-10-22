@@ -5,6 +5,7 @@ App.controller('ProductController', ['$scope', 'ProductService', function($scope
           self.product={id:null,name:'',description:'',barcode:'', price:''};
           self.products=[];
           self.barcode='';
+          self.responseCreateProduct='';
               
           self.fetchAllProducts = function(){
               ProductService.fetchAllProducts()
@@ -19,13 +20,14 @@ App.controller('ProductController', ['$scope', 'ProductService', function($scope
           };
            
           self.createProduct = function(product){
-              ProductService.createProduct(product)
+        	  self.responseCreateProduct = ProductService.createProduct(product)
 		              .then(
                       self.fetchAllProducts, 
 				              function(errResponse){
 					               console.error('Error while creating Product.');
 				              }	
                   );
+              console.log(self.responseCreateProduct);
           };
 
          self.updateProduct = function(product, id){

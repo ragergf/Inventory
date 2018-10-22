@@ -8,6 +8,6 @@ public class IndexController {
 
 	@RequestMapping("/")
 	public String getIndexPage(){
-		return "ProductManagement";
+		return "InventoryManagement";
 	}
 }

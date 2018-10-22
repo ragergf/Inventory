@@ -71,6 +71,10 @@ App.factory('ProductService', ['$http', '$q', function($http, $q){
 									}
 							);
 					
+			},
+			
+			createInventory: function(productResponse){
+					console.log("productResponse: "+productResponse);
 			}
 		
 	};

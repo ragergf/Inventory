@@ -6,6 +6,8 @@
 package org.inventory.api.inventoryApiRest.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -21,6 +23,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  *
  * @author AG261Y
@@ -31,8 +35,10 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Inventory.findAll", query = "SELECT i FROM Inventory i")
     , @NamedQuery(name = "Inventory.findById", query = "SELECT i FROM Inventory i WHERE i.id = :id")
     , @NamedQuery(name = "Inventory.findByQuantity", query = "SELECT i FROM Inventory i WHERE i.quantity = :quantity")
+    , @NamedQuery(name = "Inventory.findByPrice", query = "SELECT i FROM Inventory i WHERE i.price = :price")
     , @NamedQuery(name = "Inventory.findByLastDate", query = "SELECT i FROM Inventory i WHERE i.lastDate = :lastDate")
-    , @NamedQuery(name = "Inventory.findByLastUser", query = "SELECT i FROM Inventory i WHERE i.lastUser = :lastUser")})
+    , @NamedQuery(name = "Inventory.findByLastUser", query = "SELECT i FROM Inventory i WHERE i.lastUser = :lastUser")
+    , @NamedQuery(name = "Inventory.findByCompanyId", query = "SELECT i FROM Inventory i WHERE i.companyId = :companyId")})
 public class Inventory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,11 +49,17 @@ public class Inventory implements Serializable {
     private Long id;
     @Column(name = "quantity")
     private Integer quantity;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "price")
+    private BigDecimal price;
     @Column(name = "last_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastDate;
     @Column(name = "last_user")
     private String lastUser;
+    @Column(name = "company_id")
+    private BigInteger companyId;
+    @JsonProperty("product")
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne
     private Product productId;
@@ -75,6 +87,14 @@ public class Inventory implements Serializable {
         this.quantity = quantity;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public Date getLastDate() {
         return lastDate;
     }
@@ -89,6 +109,14 @@ public class Inventory implements Serializable {
 
     public void setLastUser(String lastUser) {
         this.lastUser = lastUser;
+    }
+
+    public BigInteger getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(BigInteger companyId) {
+        this.companyId = companyId;
     }
 
     public Product getProductId() {
