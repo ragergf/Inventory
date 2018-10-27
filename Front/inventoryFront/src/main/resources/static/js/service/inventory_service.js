@@ -2,7 +2,7 @@
 
 App.factory('InventoryService', ['$http', '$q', "$uibModal", "$log", function($http, $q, $uibModal, $log){
 
-	var server = '192.168.0.3';
+	var server = '192.168.0.150';
 	var port = '8080';
 	var module = 'inventory';
 	var modalInstance;

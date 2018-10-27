@@ -21,9 +21,9 @@ public class InventoryApiRestApplication {
 	@PostConstruct
 	public void init()
 	{
-		Department department = new Department();
-		department.setName("farmaceutico");
-		repository.save(department);		
+//		Department department = new Department();
+//		department.setName("farmaceutico");
+//		repository.save(department);		
 	}
 
 	public static void main(String[] args) {
