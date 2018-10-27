@@ -1,3 +1,4 @@
+---
 spring:
   profiles: default
   jpa:
@@ -7,12 +8,14 @@ spring:
   dataSource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost/inventory
-    username: root
-    password: root
-
+    username: server
+    password: server
 
 ---
-
+# ejecutar en la caprtea target
+# java -jar -Dspring.profiles.active=desarrollo inventoryApiRest-0.0.1-SNAPSHOT.jar
+# ejecutar donde esta el pom.xml
+# mvn spring-boot:run -Drun.jvmArguments="-Dspring.profiles.active=desarrollo"    
 
 spring:
   profiles: desarrollo
@@ -22,10 +25,9 @@ spring:
       ddl-auto: update
   dataSource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost/inventory
+    url: jdbc:mysql://localhost/inventorydesarrollo
     username: root
     password: root
-    
     
 ---
 spring:
@@ -36,6 +38,6 @@ spring:
       ddl-auto: update
   dataSource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost/inventoryProd
+    url: jdbc:mysql://localhost/inventoryproduccion
     username: produccion
     password: produccion
