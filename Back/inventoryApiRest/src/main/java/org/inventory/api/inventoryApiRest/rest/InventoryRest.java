@@ -125,7 +125,7 @@ public class InventoryRest {
     
     
     @RequestMapping(value = "/inventory/search/findByBarcode", method = RequestMethod.GET)
-    public ResponseEntity<Inventory> delete(@RequestParam("barcode") String barcode) {
+    public ResponseEntity<Inventory> searchByBarcode(@RequestParam("barcode") String barcode) {
         System.out.println("Search by barcode: " + barcode);
  
         Inventory inventory= inventoryService.findByBarcode(barcode);

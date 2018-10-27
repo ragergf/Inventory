@@ -1,25 +1,46 @@
 'use strict';
 
-App.factory('InventoryService', ['$http', '$q', '$window', function($http, $q, $window){
+App.factory('InventoryService', ['$http', '$q', "$uibModal", "$log", function($http, $q, $uibModal, $log){
 
-	var server = '192.168.0.9';
+	var server = '192.168.0.3';
 	var port = '8080';
 	var module = 'inventory';
-
+	var modalInstance;
+	
 	return {
 		
+		open: function (self, mensaje) {
+		    modalInstance = $uibModal.open({
+		      animation: true,
+		      ariaLabelledBy: 'modal-title',
+		      ariaDescribedBy: 'modal-body',
+		      templateUrl: 'html/modal.html',
+		      controller: 'ModalInstanceCtrl',		      
+		      controllerAs: 'pc',
+		      backdrop: 'static',
+		      resolve: {
+		        data: function () {
+		          return mensaje;
+		        }
+		      }
+		    });
+	 	},
+		
 			fetchAllInventories: function() {
+					
 					return $http.get('http://'+server+':'+port+'/'+module+'/')
 							.then(
 									function(response){
 										console.log(response);
+										modalInstance.close();
 										if(response.status == 204)
-											$window.alert("No se han registrado productos");
+											console.log("No se han registrado productos");										
 										return response.data;
 									}, 
 									function(errResponse){
+										modalInstance.close();
 										console.error('Error while fetching product');
-										$window.alert("Ha ocurrido un error!!");
+										console.log("Ha ocurrido un error!!");
 										return $q.reject(errResponse);
 									}
 							);
@@ -29,17 +50,19 @@ App.factory('InventoryService', ['$http', '$q', '$window', function($http, $q, $
 					return $http.post('http://'+server+':'+port+'/'+module+'/', inventory)
 							.then(
 									function(response){
-										$window.alert("Se ha agregado un nuevo producto con exito!!");
+										modalInstance.close();
+										console.log("Se ha agregado un nuevo producto con exito!!");
 										return response.data;
 									}, 
 									function(errResponse){
+										modalInstance.close();
 										console.error('Error while creating product');
 										if(errResponse.status == 409)
-											$window.alert("Ya existe un producto con ese nombre");
+											alett.log("Ya existe un producto con ese nombre");
 										else if(errResponse.status == 423)
-											$window.alert("Ya existe un producto con ese codigo de barras");
+											console.log("Ya existe un producto con ese codigo de barras");
 										else
-											$window.alert("Ha ocurrido un error al buscar el producto!!");
+											console.log("Ha ocurrido un error al buscar el producto!!");
 										return $q.reject(errResponse);
 									}
 							);
@@ -49,19 +72,21 @@ App.factory('InventoryService', ['$http', '$q', '$window', function($http, $q, $
 					return $http.put('http://'+server+':'+port+'/'+module+'/'+id, inventory)
 							.then(
 									function(response){
-										$window.alert("Se ha actualizado el producto con exito!!");
+										modalInstance.close();
+										console.log("Se ha actualizado el producto con exito!!");
 										return response.data;
 									}, 
 									function(errResponse){
+										modalInstance.close();
 										console.error('Error while updating product');
 										if (errResponse.status == 409)
-											$window.alert("No existe ese producto");
+											console.log("No existe ese producto");
 										else if(errResponse.status == 409)
-											$window.alert("Ya existe un producto con ese nombre");
+											console.log("Ya existe un producto con ese nombre");
 										else if(errResponse.status == 423)
-											$window.alert("Ya existe un producto con ese codigo de barras");
+											console.log("Ya existe un producto con ese codigo de barras");
 										else
-											$window.alert("Ha ocurrido un error al buscar el producto!!");
+											console.log("Ha ocurrido un error al buscar el producto!!");
 										return $q.reject(errResponse);
 									}
 							);
@@ -71,12 +96,14 @@ App.factory('InventoryService', ['$http', '$q', '$window', function($http, $q, $
 					return $http.delete('http://'+server+':'+port+'/'+module+'/'+id)
 							.then(
 									function(response){
-										$window.alert("Se ha borrado el producto con exito!!");
+										modalInstance.close();
+										console.log("Se ha borrado el producto con exito!!");
 										return response.data;
 									}, 
 									function(errResponse){
+										modalInstance.close();
 										console.error('Error while deleting product');
-										$window.alert("Ha ocurrido un error al borrar el producto!!");
+										console.log("Ha ocurrido un error al borrar el producto!!");
 										return $q.reject(errResponse);
 									}
 							);
@@ -91,9 +118,9 @@ App.factory('InventoryService', ['$http', '$q', '$window', function($http, $q, $
 									function(errResponse){
 										console.error('Error while search product');
 										if(errResponse.status == 404)
-											$window.alert("No existe un producto con ese codigo de barras!!");
+											console.log("No existe un producto con ese codigo de barras!!");
 										else
-											$window.alert("Ha ocurrido un error al buscar el producto!!");
+											console.log("Ha ocurrido un error al buscar el producto!!");
 										return $q.reject(errResponse);
 									}
 							);

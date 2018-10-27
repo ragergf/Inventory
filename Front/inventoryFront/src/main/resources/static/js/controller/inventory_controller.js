@@ -1,13 +1,16 @@
 'use strict';
 
-App.controller('InventoryController', ['$scope', '$window', 'InventoryService', function($scope, $window, InventoryService) {
+App.controller('InventoryController', ['$scope', 'InventoryService', function($scope, InventoryService) {
           var self = this;
-          self.inventory={id:null,quantity:null,price:null,lastDate:null,lastUser:null,companyId:'1',product:{id:null,name:'',description:'',barcode:'',department:{id:'7',name:'farmaceutico'}}};          
+          self.inventory={id:null,quantity:null,price:null,lastDate:null,lastUser:null,companyId:'1',product:{id:null,name:'',description:'',barcode:'',department:{id:'1',name:'farmaceutico'}}};          
           self.inventories=[];
-          self.barcode='';                                          
+          self.barcode='';   
+          self.prueba='';
           
           self.fetchAllInventories = function(){
         	  console.log("controller fetchAllInventories");
+        	  InventoryService.open(self, "Loading...");
+        	  console.log("Despues de open");
               InventoryService.fetchAllInventories()
                   .then(
       					       function(d) {
@@ -21,7 +24,8 @@ App.controller('InventoryController', ['$scope', '$window', 'InventoryService', 
           };
            
           self.createInventory = function(inventory){
-        	  self.responseCreateInventory = InventoryService.createInventory(inventory)
+        	  InventoryService.open(self, "Saving...");
+        	  InventoryService.createInventory(inventory)
 		              .then(
                       self.fetchAllInventories, 
 				              function(errResponse){
@@ -32,6 +36,7 @@ App.controller('InventoryController', ['$scope', '$window', 'InventoryService', 
           };
 
          self.updateInventory = function(inventory, id){
+        	 InventoryService.open(self, "Updating...");
         	 InventoryService.updateInventory(inventory, id)
 		              .then(
 				              self.fetchAllInventories, 
@@ -42,7 +47,8 @@ App.controller('InventoryController', ['$scope', '$window', 'InventoryService', 
           };
 
          self.deleteInventory = function(id){
-              InventoryService.deleteInventory(id)
+        	 InventoryService.open(self, "Delating...");
+             InventoryService.deleteInventory(id)
 		              .then(
 				              self.fetchAllInventories, 
 				              function(errResponse){
@@ -86,7 +92,7 @@ App.controller('InventoryController', ['$scope', '$window', 'InventoryService', 
           console.log("Despues de remove");
           
           self.reset = function(){
-              self.inventory={id:null,quantity:null,price:null,lastDate:null,lastUser:null,companyId:'1',product:{id:null,name:'',description:'',barcode:'',department:{id:'7',name:'farmaceutico'}}};
+              self.inventory={id:null,quantity:null,price:null,lastDate:null,lastUser:null,companyId:'1',product:{id:null,name:'',description:'',barcode:'',department:{id:'1',name:'farmaceutico'}}};
               $scope.myForm.$setPristine(); //reset Form
           };
           console.log("Despues de reset");

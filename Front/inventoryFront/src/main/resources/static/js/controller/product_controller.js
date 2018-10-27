@@ -8,6 +8,7 @@ App.controller('ProductController', ['$scope', 'ProductService', function($scope
           self.responseCreateProduct='';
               
           self.fetchAllProducts = function(){
+        	  
               ProductService.fetchAllProducts()
                   .then(
       					       function(d) {

@@ -3,6 +3,8 @@
 App.factory('UserService', ['$http', '$q', function($http, $q){
 
 	return {
+				 	
+		
 		
 			fetchAllUsers: function() {
 					return $http(

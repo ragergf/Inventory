@@ -1,4 +1,5 @@
 spring:
+  profiles: default
   jpa:
     show-sql: true
     hibernate:
@@ -8,3 +9,33 @@ spring:
     url: jdbc:mysql://localhost/inventory
     username: root
     password: root
+
+
+---
+
+
+spring:
+  profiles: desarrollo
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  dataSource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/inventory
+    username: root
+    password: root
+    
+    
+---
+spring:
+  profiles: produccion
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  dataSource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost/inventoryProd
+    username: produccion
+    password: produccion
