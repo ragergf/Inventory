@@ -11,6 +11,10 @@ import org.inventory.api.inventoryApiRest.model.Department;
 import org.inventory.api.inventoryApiRest.model.Inventory;
 import org.inventory.api.inventoryApiRest.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,7 +75,10 @@ public class InventoryServiceImpl implements InventoryService {
 
 	@Override
 	public List<Inventory> findAll(BigInteger companyId) {
-		return (List<Inventory>) inventoryRepository.findByCompanyId(companyId);
+		return (List<Inventory>) inventoryRepository.findByCompanyIdOrderByProductIdDescriptionAsc(companyId);
+//		Pageable pageable = PageRequest.of(0, 15,Sort.by("productId.description").ascending());
+//		Page<Inventory> page = inventoryRepository.findAll(pageable);
+//		return page.getContent();
 	}
 	
 	@Override

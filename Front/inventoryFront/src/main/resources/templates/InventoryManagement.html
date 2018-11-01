@@ -5,9 +5,9 @@
     <script src="js/angular/angular.js"></script>
     <script src="js/angular/angular-animate.js"></script>
     <script src="js/angular/angular-sanitize.js"></script>
+    <script src="js/angular/paging.js"></script>
     <script src="js/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>    
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/bootstrap.css"/>
     <link href="css/app.css" rel="stylesheet"/>
   </head>
   <body ng-app="myApp" class="ng-cloak">
@@ -120,12 +120,12 @@
                               <th>Price</th>
                               <th>Quantity</th>
                               <th>Barcode</th>
-                              <th width="20%"></th>
+                              <th width="40%"></th>
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="i in ctrl.inventories">
-                              <td><span ng-bind="i.id"></span></td>
+                          <tr ng-repeat="i in filteredArray">
+<!--                               <td><span ng-bind="i.id"></span></td> -->
                               <td><span ng-bind="i.product.name"></span></td>
                               <td><span ng-bind="i.product.description"></span></td>                              
                               <td><span ng-bind="i.price"></span></td>
@@ -137,14 +137,17 @@
                           </tr>
                       </tbody>
                   </table>
+                  <ul uib-pagination direction-links="false" boundary-links="true" total-items="ArrayLength" ng-model="currentPage"
+            		items-per-page="10" max-size="maxSize" ng-change="onPageChange()">
+    			</ul>
               </div>
           </div>
-      </div>
+      </div>      
       
 <!--       <script src="js/angular.js"></script> -->
       <script src="js/app.js"></script>
-      <script src="js/controller/modal.js"></script>
-      <script src="js/controller/inventory_controller.js"></script>   
+      <script src="js/controller/modal.js"></script> 
+      <script src="js/controller/inventory_controller.js"></script>       
       <script src="js/service/inventory_service.js"></script>
          
 	  

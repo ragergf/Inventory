@@ -1,11 +1,26 @@
 'use strict';
 
 App.controller('InventoryController', ['$scope', 'InventoryService', function($scope, InventoryService) {
-          var self = this;
+          
+		$scope.filteredArray = [];
+		$scope.currentPage = 0;
+		$scope.numPerPage = 10;
+		$scope.maxSize = 8;
+		$scope.arrayFilter = '';	 	  	 
+
+		$scope.sortType = ''; // set the default sort type
+		$scope.sortReverse = true; // set the default sort order
+		
+		var self = this;
           self.inventory={id:null,quantity:null,price:null,lastDate:null,lastUser:null,companyId:'1',product:{id:null,name:'',description:'',barcode:'',department:{id:'1',name:'farmaceutico'}}};          
           self.inventories=[];
           self.barcode='';   
           self.prueba='';
+          
+          $scope.mensaje= "Hola pager";
+          
+          console.log('mensaje:' + $scope.mensaje);
+          console.log('currentPage:' + $scope.currentPage);
           
           self.fetchAllInventories = function(){
         	  console.log("controller fetchAllInventories");
@@ -15,7 +30,12 @@ App.controller('InventoryController', ['$scope', 'InventoryService', function($s
                   .then(
       					       function(d) {
       					    	   	console.log("controller level: "+d);      					    	   	
-      						       	self.inventories = d;
+      						       	self.inventories = d;      						       	
+      							  //Creates the items
+      						    //Creates the items
+      							  $scope.arrayList = d;      							        							
+      							  $scope.ArrayLength = $scope.arrayList.length;
+      							  $scope.filteredArray = $scope.arrayList.slice(0, $scope.numPerPage);
       					       },
             					function(errResponse){
             						console.error('Error while fetching Currencies');
@@ -113,4 +133,30 @@ App.controller('InventoryController', ['$scope', 'InventoryService', function($s
               );
           };
           console.log("Despues de barcode");
+          
+          $scope.onPageChange = function() {
+      	    //$scope.filterFunction();
+      	    $scope.begin = (($scope.currentPage - 1) * $scope.numPerPage);
+      	    $scope.end = $scope.begin + $scope.numPerPage;
+      	    $scope.filteredArray = $scope.arrayList.slice($scope.begin, $scope.end);
+      	  }
+
+      	  $scope.sort = function(field) {
+      	    $scope.sortType = field;
+      	    $scope.sortReverse = !$scope.sortReverse;
+      	    var sorted = $filter('orderBy')($scope.arrayList, field, $scope.sortReverse);
+      	    $scope.arrayList = sorted;
+      	    $scope.filteredArray = sorted.slice(0, $scope.arrayList.length);
+      	  }
+
+      	  $scope.filterFunction = function() {
+
+      	    var filtered = $filter('filter')($scope.arrayList, $scope.arrayFilter);
+
+      	    // $scope.arrayList = filtered;
+      	    $scope.ArrayLength = filtered.length;
+
+      	    //perform the paging
+      	    $scope.filteredArray = filtered.slice(0, 5);
+      	  };
       }]);
