@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Farmacia Rapha</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/other.css" rel="stylesheet" type="text/css">
+<!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--   <link href="css/nota.css" rel="stylesheet"> -->
+  <link href="css/app.css" rel="stylesheet" type="text/css">
+  <link href="css/tabs.css" rel="stylesheet" type="text/css">
+  <link href="css/animations.css" rel="stylesheet" type="text/css">
+<!--   <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
+  <script src="js/angular/angular.js"></script>
+  <script src="js/angular/angular-animate.js"></script>
+  <script src="js/angular/angular-route.js"></script>
+  <script src="js/angular/angular-sanitize.js"></script>
+  <script src="js/angular/paging.js"></script>
+  <script src="js/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+
+<!--   APLICATION -->
+  <script src="js/app.js"></script>
+<!--   CONFIG ROUTE -->  
+  <script src="js/config/config.js"></script>
+  <script src="js/directive/directive.js"></script>
+<!--   MODAL -->
+  <script src="js/controller/main/main_controller.js"></script>
+  <script src="js/controller/modal/modal.js"></script>
+  <script src="js/service/modal/modal_service.js"></script>  
+<!--   INVENTARY -->
+  <script src="js/controller/inventory/inventory_controller.js"></script>       
+  <script src="js/service/inventory/inventory_service.js"></script>
+<!--   SALE  -->
+  <script src="js/controller/sale/sale_controller.js"></script>
+  <script src="js/service/sale/sale_service.js"></script>
+</head>
+<body ng-app="myApp" ng-class="ng-cloak">
+  <div ng-controller="MainCtrl as main"> 
+  
+<!--   <ul class="nav nav-pills nav-fill"> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link" href="#!Inventory" ng-click="main.selectTab($event)"><span class="lead">Inventory</span></a> -->
+<!--   </li> -->
+<!--   <li class="nav-item"> -->
+<!--     <a class="nav-link" href="#!Sale" ng-click="main.selectTab($event)"><span class="lead">Sales</span></a> -->
+<!--   </li> -->
+<!-- </ul>   -->
+
+
+<!--   <div class="view-animate-container"> -->
+<!--     <div ng-view class="view-animate"></div> -->
+<!--   </div> -->
+
+<div ng-include="'html/principal/principal.html'"></div>  
+</div>
+
+
+	
+</body>
+</html>

@@ -1,0 +1,110 @@
+<div class="generic-container" ng-controller="SalesController as ctrl"> 
+<!-- 			<ul> -->
+<!-- 	        	<li ng-repeat="x in ctrl.itemDetails">{{x}}</li> -->
+<!-- 	    	</ul>			 -->
+			<input type="text" ng-model="ctrl.itemDetail.inventory.product.barcode" name="barcode" class="name form-control input-sm" placeholder="Enter sale detail"  ng-minlength="3" ng-keypress="ctrl.addItemDetail($event)"/>
+<!-- 			valor: {{ctrl.itemDetail}} -->
+			
+			<div class="panel panel-default">
+                <!-- Default panel contents -->
+              <div class="panel-heading"><span class="lead">Shopping Cart</span></div>
+              <form class="nota">
+              <div class="tablecontainer" >
+              	<div ng-form="myForm">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+<!--                               <th>ID.</th> -->
+                              <th>Name</th>
+                              <th>Description</th>                             
+                              <th>Price</th>
+                              <th width="60px">Quantity</th>
+                              <th>Inventory Quantity</th>
+                              <th>Total</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="i in ctrl.itemDetails">
+<!--                               <td><span ng-bind="i.id"></span></td> -->
+                              <td><span ng-bind="i.inventory.product.name"></span></td>
+                              <td><span ng-bind="i.inventory.product.description"></span></td>                              
+                              <td><span ng-bind="i.price"></span></td>
+                              <td>
+<!--                               <span ng-bind="i.quantity"></span> -->
+								<input type="number" ng-model="i.quantity" name="quantity_{{$index}}" ng-minlength="1" ng-maxlength="4" ng-blur="ctrl.validateQuantity($event, i.inventory.quantity, $index);ctrl.sum();" ng-change="ctrl.sum()" ng-pattern="/^\d+$/" ng-required="true" style="width: 50px"/>
+								<span class="has-error" ng-show="myForm.quantity_{{$index}}.$invalid">The quantity is not valid.</span>
+								<span class="has-error" ng-show="myForm.quantity_{{$index}}.$error.required">The quantity is required.</span>
+                              </td>
+                              <td><span ng-bind="i.inventory.quantity"></span></td>
+                              <td><span ng-bind="i.price * i.quantity"></span></td>
+                              <td>
+                              <button type="button" ng-click="ctrl.removeItemDetail($index)" class="btn btn-danger custom-width">Remove</button>
+<!--                               <button type="button" ng-click="ctrl.edit(i.id)" class="btn btn-success custom-width">Edit</button>  <button type="button" ng-click="ctrl.remove(i.id)" class="btn btn-danger custom-width">Remove</button> -->
+                              </td>
+                          </tr>                          
+                      </tbody>
+                      <tfoot class="footer">
+                     	<tr>
+                          	<td/>
+                          	<td/>
+                          	<td/>
+                          	<td/>
+                          	
+                          	<td>
+                          		<span class="">Total:</span>
+                          	</td>
+                          	<td>
+                          		<span class="">{{ctrl.total}}</span>
+                          	</td>
+                          	<td/>
+                          </tr>
+                      </tfoot>
+                  </table>        
+                  </div>  
+                  <div class="row">
+                      <div class="form-actions floatRight">
+                          <input type="button" ng-click="ctrl.executeSale()" ng-disabled="ctrl.disabledButtons()" value="Sale" class="btn btn-primary custom-width" />
+                          <button type="button" ng-click="ctrl.clean()" ng-disabled="ctrl.disabledButtons()" class="btn btn-warning custom-width"> Clean</button>
+                      </div>
+                  </div>       
+              </div>
+          	  </form>
+          	  <!--           inicia tabla -->
+          <div class="panel panel-default">
+                <!-- Default panel contents -->
+              <div class="panel-heading"><span class="lead">Day Sales</span> <span class="summaryDay"> Summary Day: {{ctrl.totalDay}} $</span></div>
+              <div class="tablecontainer">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>#Sale</th>
+                              <th>Date</th>                             
+                              <th>Total</th>
+                              <th>Status</th>
+                              <th></th>                              
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="i in ctrl.filteredArray">
+                              <td><span ng-bind="i.id"></span></td>
+                              <td><span ng-bind="i.saleDate"></span></td>                              
+                              <td><span ng-bind="i.total"></span></td>
+                              <td>{{i.saleStatusId == 1 ? 'Active' : 'Cancel'}}</span>                         
+                              </td>
+                              <td>                              
+                              <button type="button" ng-click="ctrl.changeStatus(i.id,1)" ng-show="{{i.saleStatusId == 2 ? 'true' : 'false'}}" class="btn btn-success custom-width">Activate</button>
+                              <button type="button" ng-click="ctrl.changeStatus(i.id,2)" ng-show="{{i.saleStatusId == 1 ? 'true' : 'false'}}" class="btn btn-danger custom-width">Cancel</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  <ul uib-pagination direction-links="false" boundary-links="true" total-items="ctrl.ArrayLength" ng-model="ctrl.currentPage"
+            		items-per-page="ctrl.numPerPage" max-size="ctrl.maxSize" ng-change="ctrl.onPageChange()">
+    			</ul>
+              </div>
+          </div>
+          </div>
+		</div>
+		
+				

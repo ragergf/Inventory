@@ -1,7 +1,7 @@
 
 <html>
   <head>  
-    <title>Farmacia Rapha</title>  
+    <title>Farmacia Rapha - Inventory</title>  
     <script src="js/angular/angular.js"></script>
     <script src="js/angular/angular-animate.js"></script>
     <script src="js/angular/angular-sanitize.js"></script>
@@ -107,6 +107,7 @@
                   </form>
               </div>
           </div>
+<!--           inicia tabla -->
           <div class="panel panel-default">
                 <!-- Default panel contents -->
               <div class="panel-heading"><span class="lead">List of Inventories </span></div>
@@ -114,17 +115,17 @@
                   <table class="table table-hover">
                       <thead>
                           <tr>
-                              <th>ID.</th>
+<!--                               <th>ID.</th> -->
                               <th>Name</th>
                               <th>Description</th>                             
                               <th>Price</th>
                               <th>Quantity</th>
                               <th>Barcode</th>
-                              <th width="40%"></th>
+                              <th width="20%"></th>
                           </tr>
                       </thead>
                       <tbody>
-                          <tr ng-repeat="i in filteredArray">
+                          <tr ng-repeat="i in ctrl.filteredArray">
 <!--                               <td><span ng-bind="i.id"></span></td> -->
                               <td><span ng-bind="i.product.name"></span></td>
                               <td><span ng-bind="i.product.description"></span></td>                              
@@ -137,18 +138,19 @@
                           </tr>
                       </tbody>
                   </table>
-                  <ul uib-pagination direction-links="false" boundary-links="true" total-items="ArrayLength" ng-model="currentPage"
-            		items-per-page="10" max-size="maxSize" ng-change="onPageChange()">
+                  <ul uib-pagination direction-links="false" boundary-links="true" total-items="ctrl.ArrayLength" ng-model="ctrl.currentPage"
+            		items-per-page="ctrl.numPerPage" max-size="ctrl.maxSize" ng-change="ctrl.onPageChange()">
     			</ul>
               </div>
           </div>
+<!-- 			termina tabla -->
       </div>      
       
 <!--       <script src="js/angular.js"></script> -->
       <script src="js/app.js"></script>
-      <script src="js/controller/modal.js"></script> 
-      <script src="js/controller/inventory_controller.js"></script>       
-      <script src="js/service/inventory_service.js"></script>
+      <script src="js/controller/modal/modal.js"></script> 
+      <script src="js/controller/inventory/inventory_controller.js"></script>       
+      <script src="js/service/inventory/inventory_service.js"></script>
          
 	  
 	    

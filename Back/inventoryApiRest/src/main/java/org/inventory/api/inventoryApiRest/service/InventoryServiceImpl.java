@@ -7,6 +7,7 @@ import java.util.List;
 import org.inventory.api.inventoryApiRest.repository.DepartmentRepository;
 import org.inventory.api.inventoryApiRest.repository.InventoryRepository;
 import org.inventory.api.inventoryApiRest.repository.ProductRepository;
+import org.inventory.api.inventoryApiRest.rest.vo.Pager;
 import org.inventory.api.inventoryApiRest.model.Department;
 import org.inventory.api.inventoryApiRest.model.Inventory;
 import org.inventory.api.inventoryApiRest.model.Product;
@@ -76,10 +77,14 @@ public class InventoryServiceImpl implements InventoryService {
 	@Override
 	public List<Inventory> findAll(BigInteger companyId) {
 		return (List<Inventory>) inventoryRepository.findByCompanyIdOrderByProductIdDescriptionAsc(companyId);
-//		Pageable pageable = PageRequest.of(0, 15,Sort.by("productId.description").ascending());
-//		Page<Inventory> page = inventoryRepository.findAll(pageable);
-//		return page.getContent();
 	}
+	
+	public List<Inventory> findAll(BigInteger companyId, Pager pager) {		
+		Pageable pageable = PageRequest.of(pager.getPage(), pager.getSize(),Sort.by("productId.description").ascending());
+		Page<Inventory> page = inventoryRepository.findAll(pageable);
+		return page.getContent();
+	}
+
 	
 	@Override
 	public Inventory findById(long id) {
@@ -97,8 +102,7 @@ public class InventoryServiceImpl implements InventoryService {
 		Product product = null;
 		Inventory inventory;
 		product = productRepository.findByBarcode(barcode);
-		
-		inventory=inventoryRepository.findByProductId(product);						
+		inventory=inventoryRepository.findByProductId(product);				
 		return inventory;
 	}
 	
@@ -116,6 +120,11 @@ public class InventoryServiceImpl implements InventoryService {
 	public void deleteById(long id) {//CAMBIAR
 		// TODO Auto-generated method stub
 		inventoryRepository.deleteById(id);
+	}
+	@Override
+	public long count() {
+		// TODO Auto-generated method stub
+		return inventoryRepository.count();
 	}
 
 }

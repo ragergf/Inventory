@@ -17,4 +17,5 @@ public interface InventoryRepository extends PagingAndSortingRepository<Inventor
 	List<Inventory> findByCompanyIdOrderByProductIdDescriptionAsc(BigInteger companyId);
 	Inventory findByProductId(Product product);	
 	Page<Inventory> findAll(Pageable pageable);
+	long count();
 }

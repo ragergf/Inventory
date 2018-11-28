@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder.In;
 
 import org.inventory.api.inventoryApiRest.model.Inventory;
+import org.inventory.api.inventoryApiRest.rest.vo.Pager;
 import org.inventory.api.inventoryApiRest.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -38,6 +39,23 @@ public class InventoryRest {
         return new ResponseEntity<List<Inventory>>(users, HttpStatus.OK);
     }
     
+    //-------------------Retrieve All Inventory--------------------------------------------------------
+    
+    @RequestMapping(value = "/inventory/pager", method = RequestMethod.GET)
+    public ResponseEntity<Pager> listAllUsersPager(@RequestParam("page") int page,@RequestParam("size") int size) {    	
+    	BigInteger companyId = new BigInteger("1");
+    	Pager pager = new Pager();
+    	pager.setPage(page);
+    	pager.setSize(size);
+        List<Inventory> inventories = inventoryService.findAll(companyId, pager);
+        pager.setArrayFilter(inventories);
+        pager.setArrayLength(inventoryService.count());
+        if(inventories.isEmpty()){
+            return new ResponseEntity<Pager>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<Pager>(pager, HttpStatus.OK);
+    }
+        
     //-------------------Retrieve Single Inventory--------------------------------------------------------
     
     @RequestMapping(value = "/inventory/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -136,5 +154,7 @@ public class InventoryRest {
        
         return new ResponseEntity<Inventory>(inventory, HttpStatus.OK);
     }
+    
+
 
 }
