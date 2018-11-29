@@ -169,6 +169,17 @@ App.controller('SalesController', function($scope, InventoryService, SaleService
               		  , 
   		              function(errResponse){
   			               console.error('Error while updating Inventory.');
+  			               console.error(errResponse);
+  			               if(errResponse.status == 404)
+  			               {
+  			            	   	ModalService.changeShowButtonOk(true);
+  			            	   	SaleService.open(self, "Unregistered Product!!!");
+  			               }
+  			               else
+  			               {
+  			            	   	ModalService.changeShowButtonOk(true);
+               					SaleService.open(self, "Problems with the search!!!");
+  			               }
   		              }	
                 );    			
 	    	}else{
