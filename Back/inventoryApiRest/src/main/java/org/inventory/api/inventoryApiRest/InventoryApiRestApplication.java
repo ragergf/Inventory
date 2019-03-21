@@ -15,28 +15,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 public class InventoryApiRestApplication {
 	
-	@Autowired
-	DepartmentRepository repository;
-	
-	@PostConstruct
-	public void init()
-	{
-//		Department department = new Department();
-//		department.setName("farmaceutico");
-//		repository.save(department);		
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(InventoryApiRestApplication.class, args);
 	}
 	
-	 @Bean
-	    public WebMvcConfigurer corsConfigurer() {
-	        return new WebMvcConfigurerAdapter() {
-	            @Override
-	            public void addCorsMappings(CorsRegistry registry) {
-	                registry.addMapping("/**").allowedOrigins("http://localhost:8081");
-	            }
-	        };
-	    }
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+	    return new WebMvcConfigurerAdapter() {
+	        @Override
+	        public void addCorsMappings(CorsRegistry registry) {
+	            registry.addMapping("/**").allowedOrigins("*");
+	        }
+	    };
+	}
+	
 }

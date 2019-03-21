@@ -1,11 +1,15 @@
 'use strict';
 
-App.factory('InventoryService', ['$http', '$q', "$uibModal", "$log", function($http, $q, $uibModal, $log){
+App.factory('InventoryService', ['Base64','$http', '$q', "$uibModal", "$log", function(Base64, $http, $q, $uibModal, $log){
 
-	var server = '192.168.1.150';
+	var server = 'localhost';
 	var port = '8080';
 	var module = 'inventory';
 	var modalInstance;
+	var user = 'admin1';
+	var pass = 'secret1';
+	
+	
 	
 	return {
 		
@@ -27,7 +31,7 @@ App.factory('InventoryService', ['$http', '$q', "$uibModal", "$log", function($h
 	 	},
 		
 	 		fetchInventoryById: function(id, quantity) {
-			
+	 			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(user  + ":" + pass);
 	 			return $http.get('http://'+server+':'+port+'/'+module+'/'+id)
 					.then(
 							function(response){
@@ -47,7 +51,7 @@ App.factory('InventoryService', ['$http', '$q', "$uibModal", "$log", function($h
 					);
 	 		},
 	 		fetchAllInventories: function() {
-					
+	 			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(user  + ":" + pass);
 					return $http.get('http://'+server+':'+port+'/'+module+'/')
 							.then(
 									function(response){
@@ -68,6 +72,7 @@ App.factory('InventoryService', ['$http', '$q', "$uibModal", "$log", function($h
 			
 			fetchAllInventoriesPager: function(pager) {
 				
+				$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(user  + ":" + pass);
 				return $http.get('http://'+server+':'+port+'/'+module+'/pager?page='+pager.page+'&size='+pager.size)
 						.then(
 								function(response){
@@ -87,6 +92,7 @@ App.factory('InventoryService', ['$http', '$q', "$uibModal", "$log", function($h
 			},
 		    
 		    createInventory: function(inventory){
+		    	$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(user  + ":" + pass);
 					return $http.post('http://'+server+':'+port+'/'+module+'/', inventory)
 							.then(
 									function(response){
@@ -109,6 +115,7 @@ App.factory('InventoryService', ['$http', '$q', "$uibModal", "$log", function($h
 		    },
 		    
 		    updateInventory: function(inventory, id){
+		    	$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(user  + ":" + pass);
 					return $http.put('http://'+server+':'+port+'/'+module+'/'+id, inventory)
 							.then(
 									function(response){
@@ -133,6 +140,7 @@ App.factory('InventoryService', ['$http', '$q', "$uibModal", "$log", function($h
 			},
 		    
 			deleteInventory: function(id){
+				$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(user  + ":" + pass);
 					return $http.delete('http://'+server+':'+port+'/'+module+'/'+id)
 							.then(
 									function(response){
@@ -150,6 +158,7 @@ App.factory('InventoryService', ['$http', '$q', "$uibModal", "$log", function($h
 			},
 			
 			searchByBarcode: function(barcode){
+				$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(user  + ":" + pass);
 					return $http.get('http://'+server+':'+port+'/'+module+'/search/findByBarcode?barcode='+barcode)
 					.then(
 									function(response){															

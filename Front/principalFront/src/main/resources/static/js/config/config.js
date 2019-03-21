@@ -1,7 +1,8 @@
 'use strict';
 
 App.config(['$routeProvider', '$locationProvider',
-    function($routeProvider, $locationProvider) {
+    function($routeProvider, $locationProvider, ) {		
+	
 	console.log("dentro de config");  
 	$routeProvider
         .when('/Inventory', {
